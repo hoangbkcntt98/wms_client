@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
+import store from './store';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -21,7 +23,8 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
+      <Provider store = {store}>
+          <HashRouter>
           <React.Suspense fallback={loading}>
             <Switch>
               <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
@@ -32,6 +35,7 @@ class App extends Component {
             </Switch>
           </React.Suspense>
       </HashRouter>
+      </Provider>
     );
   }
 }
