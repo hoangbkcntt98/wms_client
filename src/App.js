@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import store from './store';
+import appStore from './redux/store';
 
 const loading = (
   <div className="pt-3 text-center">

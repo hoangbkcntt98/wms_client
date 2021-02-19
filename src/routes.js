@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 
@@ -40,6 +41,7 @@ const User = React.lazy(() => import('./views/users/User'));
 const Inventory = React.lazy(()=> import('./views/inventory/Inventory'));
 const AnnualDemand = React.lazy(()=> import('./views/annual_demand/annualDemand'));
 const Abc = React.lazy(()=> import('./views/abc/Abc'));
+const Task = React.lazy(()=> import('./views/task/Task'));
 
 
 const routes = [
@@ -85,7 +87,8 @@ const routes = [
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/inventory',name:'Inventory',component: Inventory,exact: true},
   { path: '/abcs',name:'Abc',component: Abc,exact: true},
-  { path: '/annual/all',name:'AnnualDemand',component: AnnualDemand,exact: true}
+  { path: '/annual/all',name:'AnnualDemand',component: AnnualDemand,exact: true},
+  { path: '/task/all',name:'TaskList',component: Task,exact: true},
 ];
 
 export default routes;

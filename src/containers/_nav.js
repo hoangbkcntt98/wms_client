@@ -3,6 +3,24 @@ import CIcon from '@coreui/icons-react'
 
 const _nav =  [
   {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Task',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    _children:[
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Danh sách hoạt động',
+        to: '/task/all'
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Ước lượng hoạt động'
+      },
+
+    ]
+    
+  },
+  {
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
     to: '/dashboard',
