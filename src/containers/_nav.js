@@ -16,6 +16,22 @@ const _nav =  [
         _tag: 'CSidebarNavItem',
         name: 'Ước lượng hoạt động'
       },
+    ]
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Rủi ro',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    _children:[
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Danh sách rủi ro',
+        to: '/risk/all'
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Bảng xác suất điều kiện'
+      },
 
     ]
     

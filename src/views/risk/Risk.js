@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import {
   CBadge,
   CButton,
@@ -8,32 +8,27 @@ import {
   CCol,
   CCollapse, CDataTable,
   CRow,
+  CModal,
   CPagination
 } from '@coreui/react'
 import React, { lazy, useState,useEffect } from 'react'
-import abcServices from 'src/services/abcServices';
-import CreateAbcForm from 'src/views/abc/createAbc'
-
-
+import riskService from 'src/services/riskService';
+import CreateRiskForm from './CreateRisk';
+import DeleteRiskModal from './deleteRisk';
+import UpdateRiskForm from './updateRisk';
+import ImportRiskForm from './ImportRisk'
 const Risk = () => {
   const [details, setDetails] = useState([])
   const [data,setData] = useState([])
-  const [error,setError] = useState(null)
-  const [open,setOpen] = useState(false)
   useEffect(()=>{
     fetchData()
   },[])
-  const handleOpen=()=>{
-      setOpen(true);
-  }
-  const handleClose = () =>{
-      setOpen(false)
-  }
   const fetchData = ()=>{
-      abcServices.getAbcs().then((res)=>{
+      riskService.getRisks().then((res)=>{
           setData(res.object)
       })
   }
+  
   const toggleDetails = (index) => {
     const position = details.indexOf(index)
     let newDetails = details.slice()
@@ -45,42 +40,37 @@ const Risk = () => {
     }
     setDetails(newDetails)
   }
+  
   const fields = [
-    { key: 'id', _style: { width: '5%' },label:'Id' },
-    { key: 'name', _style: { width: '35%' },label:'name' },
-    { key: 'range', _style: { width: '5%' },label:'range' },
+    { key: 'riskId', _style: { width: '10%' },label:'ID' },
+    { key: 'name', _style: { width: '25%' },label:'Tên Rủi Ro' },
+    { key: 'description', _style: { width: '30%' },label:'Mô tả' },
+    { key: 'parents', _style: { width: '11%' },label:'Rủi ro Cha' },
+    // { key: 'tasks', _style: { width: '11%' },label:'Hoạt động bị ảnh hưởng' },
     {
       key: 'show_details',
       label: '',
       _style: { width: '10%' },
       sorter: false,
-      filter: false
+      filter: false,
+      label:'Chi tiết'
     }
   ]
-
-  const createForm = open?<CreateAbcForm closeDialog = {handleClose} fetchData = {fetchData}></CreateAbcForm>:null
-  const abcAnalysis = ()=>{
-    axios.get('http://localhost:8080/api/inventory/abcAnalysis').then(res=>setData(res.data.object)).catch(e=>setError(e));
-    if(error!=null) alert(error);
-  }
   return (
     <>
       <CRow>
         <CCol>
           <CCard>
             <CCardHeader>
-              Abc
+              Risk
             </CCardHeader>
             <CCardBody>
-            <CButton name = "isCreate" size="sm" color="primary" className="ml-1" onClick = {()=> handleOpen()}>
-                Create New Abc
-              </CButton>
-              <CButton size="sm" color="primary" className="ml-1" onClick = {()=> abcAnalysis()}>
-                ABC Analysis
-              </CButton>
+            <CreateRiskForm fetchData = {fetchData}></CreateRiskForm>
+            <ImportRiskForm fetchData={fetchData}></ImportRiskForm>
                               <br></br> 
                              <br></br> 
               <CDataTable
+              
                 items={data}
                 fields={fields}
                 columnFilter
@@ -88,9 +78,13 @@ const Risk = () => {
                 footer
                 itemsPerPageSelect
                 pagination={{'align': 'center'}}
-                itemsPerPage={5}
+                itemsPerPage={20}
                 hover
                 sorter
+                outlined={true}
+                clickableRows={true}
+                border={true}
+                striped={true}
                 scopedSlots={{
                   
                   'show_details':
@@ -100,11 +94,12 @@ const Risk = () => {
                           <CButton
                             color="primary"
                             variant="outline"
-                            shape="square"
+                            shape="pill"
                             size="sm"
+                            // variant="ghost"
                             onClick={() => { toggleDetails(index) }}
                           >
-                            {details.includes(index) ? 'Hide' : 'Show'}
+                            {details.includes(index) ? 'Ẩn' : 'Hiện'}
                           </CButton>
                         </td>
                       )
@@ -117,15 +112,15 @@ const Risk = () => {
                             <h4>
                               {item.name}
                             </h4>
-                            <p className="text-muted">name: {item.name}</p>
-                            <p className="text-muted">id: {item.id}</p>
+                            <p className="text-muted ml-4" color = "#ced2d8">ID: {item.riskId}</p>
+                            <p className="text-muted ml-4">Rủi ro cha : {item.parents.length>0?item.parents:'Không có'} </p>
                             
-                            <CButton size="sm" color="info">
-                              Edit
-                              </CButton>
-                            <CButton size="sm" color="danger" className="ml-1">
-                              Delete
-                              </CButton>
+                            <p className="text-muted ml-4" color = "#ced2d8">Hoạt động bị ảnh hưởng: {item.tasks}</p>
+                            <p className="text-muted ml-4">Mô tả: </p>
+                            <p className = "ml-5">{item.description}</p>
+                            
+                            <UpdateRiskForm riskUpdate = {item} fetchData = {fetchData}></UpdateRiskForm>
+                            <DeleteRiskModal riskDelete = {item} fetchData = {fetchData}></DeleteRiskModal>
                           </CCardBody>
                         </CCollapse>
                       )
@@ -137,12 +132,11 @@ const Risk = () => {
           </CCard>
         </CCol>
       </CRow>
-      {createForm}
+    
+   
     </>
     
   )
-
-
-
 }
-export default Abc
+
+export default Risk;
