@@ -13,7 +13,7 @@ import {
 } from '@coreui/react'
 import React, { lazy, useState,useEffect } from 'react'
 import riskService from 'src/services/riskService';
-import CreateRiskForm from './CreateRisk';
+import CreateRiskForm from './createRisk';
 import DeleteRiskModal from './deleteRisk';
 import UpdateRiskForm from './updateRisk';
 import ImportRiskForm from './ImportRisk'

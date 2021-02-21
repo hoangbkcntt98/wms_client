@@ -43,6 +43,7 @@ const AnnualDemand = React.lazy(()=> import('./views/annual_demand/annualDemand'
 const Abc = React.lazy(()=> import('./views/abc/Abc'));
 const Task = React.lazy(()=> import('./views/task/Task'));
 const Risk = React.lazy(()=> import('./views/risk/Risk'));
+const RiskDistribution = React.lazy(()=> import('./views/risk_distribution/RiskDistribution'))
 
 
 const routes = [
@@ -91,6 +92,7 @@ const routes = [
   { path: '/annual/all',name:'AnnualDemand',component: AnnualDemand,exact: true},
   { path: '/task/all',name:'TaskList',component: Task,exact: true},
   { path: '/risk/all',name:'RiskList',component: Risk,exact: true},
+  { path: '/riskDis/all',name:'RiskDistributionList',component: RiskDistribution,exact: true},
   
 ];
 

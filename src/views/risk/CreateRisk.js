@@ -55,7 +55,6 @@ const CreateRiskForm = ({fetchData}) =>{
    }
     const form = 
     (
-        
           <CCard>
             <CCardHeader>
               Thêm Rủi ro

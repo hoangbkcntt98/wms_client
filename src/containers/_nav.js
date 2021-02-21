@@ -30,7 +30,8 @@ const _nav =  [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Bảng xác suất điều kiện'
+        name: 'Bảng xác suất điều kiện',
+        to:'/riskDis/all'
       },
 
     ]
