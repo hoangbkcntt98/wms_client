@@ -12,6 +12,9 @@ const taskService = {
     },
     updateTask(task){
         return services.post('http://localhost:8080/task/update',task)
+    },
+    calcPertProb(){
+        return services.get('http://localhost:8080/pert/test')
     }
     
 }

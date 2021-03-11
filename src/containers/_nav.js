@@ -2,6 +2,7 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 
 const _nav =  [
+  
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Task',
@@ -9,13 +10,15 @@ const _nav =  [
     _children:[
       {
         _tag: 'CSidebarNavItem',
-        name: 'Danh sách hoạt động',
-        to: '/task/all'
+        name: 'Dashboard',
+        to: '/task/dash'
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Ước lượng hoạt động'
+        name: 'Danh sách hoạt động',
+        to: '/task/all'
       },
+     
     ]
   },
   {
@@ -23,6 +26,11 @@ const _nav =  [
     name: 'Rủi ro',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     _children:[
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Dashboard',
+        to: '/risk/dash'
+      },
       {
         _tag: 'CSidebarNavItem',
         name: 'Danh sách rủi ro',

@@ -13,7 +13,7 @@ import {
 } from '@coreui/react'
 import React, { lazy, useState,useEffect } from 'react'
 import riskService from 'src/services/riskService';
-import CreateRiskForm from './createRisk';
+import CreateRiskForm from './CreateRisk';
 import DeleteRiskModal from './deleteRisk';
 import UpdateRiskForm from './updateRisk';
 import ImportRiskForm from './ImportRisk'
@@ -21,12 +21,14 @@ const Risk = () => {
   const [details, setDetails] = useState([])
   const [data,setData] = useState([])
   useEffect(()=>{
+  
     fetchData()
   },[])
   const fetchData = ()=>{
       riskService.getRisks().then((res)=>{
           setData(res.object)
       })
+      
   }
   
   const toggleDetails = (index) => {
@@ -58,11 +60,11 @@ const Risk = () => {
   ]
   return (
     <>
-      <CRow>
-        <CCol>
+      {/* <CRow> */}
+        {/* <CCol> */}
           <CCard>
             <CCardHeader>
-              Risk
+              Danh sách rủi ro
             </CCardHeader>
             <CCardBody>
             <CreateRiskForm fetchData = {fetchData}></CreateRiskForm>
@@ -130,8 +132,8 @@ const Risk = () => {
               
             </CCardBody>
           </CCard>
-        </CCol>
-      </CRow>
+        {/* </CCol> */}
+      {/* </CRow> */}
     
    
     </>

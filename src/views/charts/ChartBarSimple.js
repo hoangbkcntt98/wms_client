@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {  lazy, useState,useEffect ,useSelector} from 'react'
 import PropTypes from 'prop-types'
 import { getColor } from '@coreui/utils'
 import { CChartBar } from '@coreui/react-chartjs'
-
+import riskService from 'src/services/riskService';
 const ChartBarSimple = props => {
-
+  const [data,setData] = useState([]);
+    const [probs, setProbs] = useState({});
+    const [idList,setIdList] = useState([]);
   const {
     backgroundColor,
     pointHoverBackgroundColor,
@@ -13,14 +15,32 @@ const ChartBarSimple = props => {
     pointed,
     ...attributes
   } = props
-
+  useEffect(()=>{
+    fetchData();
+  },[])
+const fetchData = ()=>{
+     riskService.getRisks().then((res)=>{
+        setData(res.object)
+        let arr = data.map(d=>d.prob*100)
+        let ids = data.map(d=>d.riskId)
+        setProbs(arr);
+        setIdList(ids)
+    })
+  }
   const defaultDatasets = (()=>{
+    riskService.getRisks().then((res)=>{
+    setData(res.object)
+    let arr = data.map(d=>d.prob*100)
+    let ids = data.map(d=>d.riskId)
+    setProbs(arr);
+    setIdList(ids)
+    })
     return [
       {
-        data: dataPoints,
+        data: probs,
         backgroundColor: getColor(backgroundColor),
         pointHoverBackgroundColor: getColor(pointHoverBackgroundColor),
-        label: label,
+        label: idList,
         barPercentage: 0.5,
         categoryPercentage: 1
       }

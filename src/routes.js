@@ -44,7 +44,8 @@ const Abc = React.lazy(()=> import('./views/abc/Abc'));
 const Task = React.lazy(()=> import('./views/task/Task'));
 const Risk = React.lazy(()=> import('./views/risk/Risk'));
 const RiskDistribution = React.lazy(()=> import('./views/risk_distribution/RiskDistribution'))
-
+const BayesDashboard = React.lazy(()=> import('./views/algorithms/Bayes'))
+const TaskDashboard = React.lazy(()=> import('./views/task/Dashboard'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -93,6 +94,8 @@ const routes = [
   { path: '/task/all',name:'TaskList',component: Task,exact: true},
   { path: '/risk/all',name:'RiskList',component: Risk,exact: true},
   { path: '/riskDis/all',name:'RiskDistributionList',component: RiskDistribution,exact: true},
+  { path: '/risk/dash',name:'Risk /Dashboard',component: BayesDashboard,exact: true},
+  {path:  '/task/dash', name: 'Task /Dashboard', component: TaskDashboard,exact: true}
   
 ];
 

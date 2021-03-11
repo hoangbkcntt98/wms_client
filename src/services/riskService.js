@@ -12,6 +12,9 @@ const riskService = {
     },
     updateRisk(risk){
         return services.post('http://localhost:8080/risk/update',risk)
+    },
+    calcProb(){
+        return services.get('http://localhost:8080/bayes/calculate')
     }
     
 }
